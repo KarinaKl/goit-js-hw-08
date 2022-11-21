@@ -8,11 +8,12 @@ const refs = {
 
 refs.form.addEventListener('submit', onFormSumbit);
 refs.form.addEventListener('input', throttle(onInput, 500));
-populateTextarea();
-populateMail();
 
 const STORAGE_KEY = 'formData';
 let formData = {};
+
+populateTextarea();
+populateMail();
 
 function onFormSumbit(e) {
   e.preventDefault();
