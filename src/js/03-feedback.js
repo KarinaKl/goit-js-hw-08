@@ -22,12 +22,16 @@ function onFormSumbit(e) {
 }
 
 function onInput(e) {
-  formData[e.target.name] = e.target.value;
+  // formData[e.target.name] = e.target.value;
+  // localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  const email = refs.mail.value;
+  const notification = refs.textarea.value;
+  formData = { email, notification };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 function populateTextarea() {
-  const savedMessage = localStorage.getItem('formData');
+  const savedMessage = localStorage.getItem(STORAGE_KEY);
   const message = JSON.parse(savedMessage);
   if (savedMessage) {
     refs.textarea.value = message.message;
@@ -35,7 +39,7 @@ function populateTextarea() {
 }
 
 function populateMail() {
-  const savedMail = localStorage.getItem('formData');
+  const savedMail = localStorage.getItem(STORAGE_KEY);
   const mail = JSON.parse(savedMail);
   if (savedMail) {
     refs.mail.value = mail.email;
