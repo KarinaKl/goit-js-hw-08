@@ -12,8 +12,7 @@ refs.form.addEventListener('input', throttle(onInput, 500));
 const STORAGE_KEY = 'formData';
 let formData = {};
 
-populateTextarea();
-populateMail();
+populateForm();
 
 function onFormSumbit(e) {
   e.preventDefault();
@@ -22,26 +21,17 @@ function onFormSumbit(e) {
 }
 
 function onInput(e) {
-  // formData[e.target.name] = e.target.value;
-  // localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
   const email = refs.mail.value;
   const notification = refs.textarea.value;
   formData = { email, notification };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
-function populateTextarea() {
+function populateForm() {
   const savedMessage = localStorage.getItem(STORAGE_KEY);
-  const message = JSON.parse(savedMessage);
+  const form = JSON.parse(savedMessage);
   if (savedMessage) {
-    refs.textarea.value = message.message;
-  }
-}
-
-function populateMail() {
-  const savedMail = localStorage.getItem(STORAGE_KEY);
-  const mail = JSON.parse(savedMail);
-  if (savedMail) {
-    refs.mail.value = mail.email;
+    refs.textarea.value = form.message || '';
+    refs.mail.value = form.email || '';
   }
 }
